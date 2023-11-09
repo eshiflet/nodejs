@@ -10,7 +10,7 @@ exports.read_entries = async (req, res) => {
     var filterparam = "";
 
       if (sortparam !== "")
-        res.send({ message: "Found sort paramater: " + req.query.sort});
+        res.send({ message: "Found sort paramater: " + sortparam + " and " + req.query.sort});
       else
         res.json(ret);
 
