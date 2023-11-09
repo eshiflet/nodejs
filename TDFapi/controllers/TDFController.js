@@ -10,9 +10,9 @@ exports.read_entries = async (req, res) => {
     else if (req.query.sort === "finishgc") {
       ret = ret.sort((a,b) => a.FINISH - b.FINISH); //need to fix DNF, doesn't sort with numbers
     }
-    if (req.query.team !== "") {
-      ret = ret.filter(a => a.TEAM === req.query.team);
-    }
+//    if (req.query.team !== "") {
+//      ret = ret.filter(a => a.TEAM === req.query.team);
+//    }
     res.json(ret);
   } catch (error) {
     res.send({ message: "Bad request: " + error });
