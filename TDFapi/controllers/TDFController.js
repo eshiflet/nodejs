@@ -7,6 +7,8 @@ exports.read_entries = async (req, res) => {
 
       if (req.query.sort !== null)
         res.send({ message: "Found sort paramater: " + req.query.sort});
+      else
+        res.json(ret);
 
 //    if (req.query.sort === "ridernumber") {
 //      ret = ret.sort((a,b) => a.RIDERNUMBER - b.RIDERNUMBER);
