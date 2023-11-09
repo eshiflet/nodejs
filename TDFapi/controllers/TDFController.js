@@ -5,7 +5,7 @@ exports.read_entries = async (req, res) => {
   try {
     const ret = await Entry.find();
 
-      if (req.query.sort !== "")
+      if (req.query.sort !== null)
         res.send({ message: "Found sort paramater: " + req.query.sort});
 
 //    if (req.query.sort === "ridernumber") {
