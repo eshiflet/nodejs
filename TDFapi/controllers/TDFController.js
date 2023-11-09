@@ -4,7 +4,9 @@ var mongoose = require("mongoose"),
 exports.read_entries = async (req, res) => {
   try {
     const ret = await Entry.find();
-    res.json(ret);
+    if (req.query.sort === "ridernumber")
+      res.json(ret.sort((a,b) => b.RIDERNUMBER - a.RIDERNUMBER));
+    else res.json(ret);
   } catch (error) {
     res.send({ message: "Bad request: " + error });
   }
