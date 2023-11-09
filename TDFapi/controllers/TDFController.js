@@ -5,7 +5,7 @@ exports.read_entries = async (req, res) => {
   try {
     const ret = await Entry.find();
     if (req.query.sort === "ridernumber")
-      res.json(ret.sort((a,b) => b.RIDERNUMBER - a.RIDERNUMBER));
+      res.json(ret.sort((a,b) => a.RIDERNUMBER - b.RIDERNUMBER));
     else res.json(ret);
   } catch (error) {
     res.send({ message: "Bad request: " + error });
