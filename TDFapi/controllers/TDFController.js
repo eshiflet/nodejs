@@ -8,11 +8,20 @@ exports.read_entries = async (req, res) => {
     if (req.query.sort)
       sortparam = req.query.sort;
     var filterparam = "";
+    if (req.query.team)
+      teamparam = req.query.team;
 
-      if (sortparam !== "")
-        res.send({ message: "Found sort paramater: " + sortparam + " and " + req.query.sort});
-      else
-        res.json(ret);
+      if (sortparam !== "") {
+        if (sortparam === "ridernumber") {
+          ret = ret.sort((a,b) => a.RIDERNUMBER - b.RIDERNUMBER);
+        }
+        else if (sortparam === "finishgc") {
+          ret = ret.sort((a,b) => a.FINISH - b.FINISH); //need to fix DNF, doesn't sort with numbers
+        }
+      }
+//        res.send({ message: "Found sort paramater: " + sortparam + " and " + req.query.sort});
+
+      res.json(ret);
 
 //    if (req.query.sort === "ridernumber") {
 //      ret = ret.sort((a,b) => a.RIDERNUMBER - b.RIDERNUMBER);
