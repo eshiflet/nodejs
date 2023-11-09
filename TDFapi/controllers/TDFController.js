@@ -3,7 +3,7 @@ var mongoose = require("mongoose"),
 
 exports.read_entries = async (req, res) => {
   try {
-    const ret = await Entry.find();
+    var ret = await Entry.find();
     var sortparam = "";
     if (req.query.sort)
       sortparam = req.query.sort;
