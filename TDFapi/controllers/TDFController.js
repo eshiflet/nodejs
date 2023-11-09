@@ -4,35 +4,36 @@ var mongoose = require("mongoose"),
 exports.read_entries = async (req, res) => {
   try {
     var ret = await Entry.find();
-    var sortparam = "";
-    if (req.query.sort)
-      sortparam = req.query.sort;
-    var filterparam = "";
-    if (req.query.team)
-      teamparam = req.query.team;
 
-      if (sortparam !== "") {
-        if (sortparam === "ridernumber") {
-          ret = ret.sort((a,b) => a.RIDERNUMBER - b.RIDERNUMBER);
-        }
-        else if (sortparam === "finishgc") {
-          ret = ret.sort((a,b) => a.FINISH - b.FINISH); //need to fix DNF, doesn't sort with numbers
-        }
-      }
+//    var sortparam = "";
+//    if (req.query.sort)
+//      sortparam = req.query.sort;
+//    var filterparam = "";
+//    if (req.query.team)
+//      teamparam = req.query.team;
+
+//      if (sortparam !== "") {
+//        if (sortparam === "ridernumber") {
+//          ret = ret.sort((a,b) => a.RIDERNUMBER - b.RIDERNUMBER);
+//        }
+//        else if (sortparam === "finishgc") {
+//          ret = ret.sort((a,b) => a.FINISH - b.FINISH); //need to fix DNF, doesn't sort with numbers
+//        }
+//      }
 //        res.send({ message: "Found sort paramater: " + sortparam + " and " + req.query.sort});
 
       res.json(ret);
 
-//    if (req.query.sort === "ridernumber") {
-//      ret = ret.sort((a,b) => a.RIDERNUMBER - b.RIDERNUMBER);
-//    }
-//    else if (req.query.sort === "finishgc") {
-//      ret = ret.sort((a,b) => a.FINISH - b.FINISH); //need to fix DNF, doesn't sort with numbers
-//    }
-//    if (req.query.team !== "") {
-//      ret = ret.filter(a => a.TEAM === req.query.team);
-//    }
-//    res.json(ret);
+    if (req.query.sort === "ridernumber") {
+      ret = ret.sort((a,b) => a.RIDERNUMBER - b.RIDERNUMBER);
+    }
+    else if (req.query.sort === "finishgc") {
+      ret = ret.sort((a,b) => a.FINISH - b.FINISH); //need to fix DNF, doesn't sort with numbers
+    }
+    if (req.query.team) {
+      ret = ret.filter(a => a.TEAM === req.query.team);
+    }
+    res.json(ret);
   } catch (error) {
     res.send({ message: "Bad request: " + error });
   }
